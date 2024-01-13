@@ -55,8 +55,7 @@
                 </div>
                 <div class="w-full md:w-1/3 lg:w-1/2 px-4 self-center relative animate-move">
                     <div class="card shadow-xl md:scale-110 border border-slate-200 mx-auto w-fit">
-                        <img class="rounded-lg w-60 h-fit" src="./assets/img/profile-compress.webp"
-                            alt="Muhammad Zhafran Ilham">
+                        <img class="rounded-lg w-60 h-fit" src="./assets/img/profile.webp" alt="Muhammad Zhafran Ilham">
                         <div class="text-main mt-2 font-mono">
                             &lt;&gt;
                             <div class="w-fit m-0">
@@ -93,7 +92,8 @@
                     </h1>
                     <p class="font-normal text-base md:text-lg text-main dark:text-slate-400 leading-relaxed">Tertarik
                         pada dunia programming dengan mengawalinya dari pengembangan website. Memiliki niat untuk terus
-                        mengasah skill dengan mengikuti arus perkembangan industri. Saat ini sedang mencoba untuk
+                        mengasah skill dengan mengikuti arus perkembangan industri.
+                        <!-- Saat ini sedang mencoba untuk
                         mendalami pengembangan back-end website dengan teknologi
                         <a href="https://expressjs.com/" target="_blank"
                             class="inline-flex gap-1 max-w-fit text-primary underline underline-offset-2">express.js
@@ -102,7 +102,7 @@
                         <a href="https://nodejs.org/" target="_blank"
                             class="inline-flex gap-1 max-w-fit text-primary underline underline-offset-2">node.js
                         </a>
-                        dengan pemanfaatan API
+                        dengan pemanfaatan API -->
                     </p>
                 </div>
 
@@ -234,7 +234,8 @@
 
     <!-- Skills Section Start -->
     <section id="skills" class="py-28 md:pt-36 md:pb-48 w-full bg-white bg-cover bg-right-top md:bg-cover md:bg-right"
-        style="background-image: url(./assets/svg/curve-line.svg);" data-aos="fade-up" data-aos-duration="800" data-aos-offset="250">
+        style="background-image: url(./assets/svg/curve-line.svg);" data-aos="fade-up" data-aos-duration="800"
+        data-aos-offset="250">
         <div class="container">
             <div class="px-4">
                 <h1 class="font-bold font-poppins text-black text-2xl md:text-3xl text-center mb-3">
@@ -501,11 +502,18 @@
                 <hr class="h-[2px] border-slate-600 bg-slate-600 opacity-60">
             </div>
 
-            <p class="text-gray-300 text-sm text-center font-normal ">© 2023 Muhammad Zhafran Ilham</p>
+            <p class="text-gray-300 text-sm text-center font-normal ">© <span id="year"></span> Muhammad Zhafran Ilham
+            </p>
         </div>
     </section>
     <!-- Footer End -->
 
+    <script>
+        const yearText = document.getElementById('year')
+        const dateObject = new Date()
+
+        yearText.innerText = dateObject.getFullYear()
+    </script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="./src/typed.js"></script>
     <script>
