@@ -990,6 +990,18 @@ video {
   fill: currentColor;
 }
 
+.fill-\[\#\] {
+  fill: #;
+}
+
+.fill-\[\#\#61DAFB\] {
+  fill: ##61DAFB;
+}
+
+.fill-\[\#61DAFB\] {
+  fill: #61DAFB;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
