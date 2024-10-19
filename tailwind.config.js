@@ -18,13 +18,18 @@ module.exports = {
         main: '#334155'
       },
       animation: {
-        'move': 'move 6s ease-in-out infinite'
+        'move': 'move 6s ease-in-out infinite',
+        'loop-scroll': 'loop-scroll 3s linear infinite'
       },
       keyframes: {
         move: {
           '50%': {
             transform: 'translateY(1.3rem)'
           }
+        },
+        'loop-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' }
         }
       }
     },
