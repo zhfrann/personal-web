@@ -20,7 +20,7 @@ export const DATA = {
   description:
     "Software Engineering undergraduate with hands-on experience and a strong interest in backend development.",
   ogDescription:
-    "Portfolio of Muhammad Zhafran Ilham, a Software Engineering undergraduate focused on backend development, REST APIs, databases, and scalable web applications.",
+    "Personal Website of Muhammad Zhafran Ilham, a Software Engineering undergraduate focused on backend development.",
   summary:
     "Fourth-year Software Engineering undergraduate with hands-on experience in backend development, RESTful API design, and database management through academic, organizational, and professional projects. Familiar with building and maintaining applications using technologies such as TypeScript, JavaScript, Express.js, NestJS, Prisma ORM, Laravel, PostgreSQL, and MySQL. Interested in backend engineering and continuously developing an understanding of software development practices, API documentation, containerization, and system design fundamentals. A motivated learner and collaborative team member who is eager to improve technical and problem-solving skills while contributing to meaningful software projects.",
   avatarUrl: "/picofme.webp",
