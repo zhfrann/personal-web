@@ -103,10 +103,11 @@ jobs:
           VPS_USER: ${{ secrets.VPS_USER }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          ssh -i ~/.ssh/id_ed25519 "$VPS_USER@$VPS_HOST" << EOF
-            set -e
+          ssh -i ~/.ssh/id_ed25519 "$VPS_USER@$VPS_HOST" \
+            "IMAGE_TAG='$IMAGE_TAG' bash -s" <<'REMOTE'
+            set -euo pipefail
 
-            cd /home/$VPS_USER/apps/personal-web
+            cd "$HOME/apps/personal-web"
 
             git fetch origin main
             git reset --hard origin/main
@@ -116,19 +117,26 @@ jobs:
             docker compose pull
             docker compose up -d --remove-orphans
 
-            docker image prune -f
+            healthy=0
 
-            for attempt in {1..10}; do
+            for attempt in $(seq 1 10); do
               if curl --fail --silent --show-error \
                 http://127.0.0.1:8080/ > /dev/null; then
                 echo "Application is healthy."
-                exit 0
+                healthy=1
+                break
               fi
 
               echo "Waiting for application... ($attempt/10)"
               sleep 2
             done
 
-            echo "Application failed health check."
-            exit 1
-          EOF
+            if [ "$healthy" -ne 1 ]; then
+              echo "Application failed health check."
+              docker compose ps
+              docker compose logs --tail=50
+              exit 1
+            fi
+
+            docker image prune -f
+          REMOTE
