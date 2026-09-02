@@ -1,0 +1,169 @@
+---
+export const prerender = true;
+
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const stories = (
+    await getCollection("projectStories", ({ data }) => !data.draft)
+  ).sort((a, b) => a.data.order - b.data.order);
+
+  return stories.map((story, index) => ({
+    params: { slug: story.id },
+    props: {
+      story,
+      previousStory: index > 0 ? stories[index - 1] : undefined,
+      nextStory: index < stories.length - 1 ? stories[index + 1] : undefined,
+    },
+  }));
+}
+
+interface Props {
+  story: CollectionEntry<"projectStories">;
+  previousStory?: CollectionEntry<"projectStories">;
+  nextStory?: CollectionEntry<"projectStories">;
+}
+
+const { story, previousStory, nextStory } = Astro.props;
+const { Content } = await render(story);
+---
+
+<Layout
+  title={story.data.title}
+  description={story.data.description}
+  image={story.data.coverImage}
+>
+  <main id="main-content" class="mx-auto min-w-0 max-w-5xl overflow-x-clip">
+    <article class="min-w-0">
+      <header class="mx-auto max-w-3xl">
+        <a
+          href="/blog"
+          class="mb-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <span aria-hidden="true">←</span>
+          All project stories
+        </a>
+
+        <div
+          class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground"
+        >
+        </div>
+        <h1
+          class="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-6xl"
+        >
+          {story.data.title}
+        </h1>
+        <p
+          class="mt-5 text-pretty text-lg leading-8 text-muted-foreground sm:text-xl"
+        >
+          {story.data.description}
+        </p>
+
+        <dl class="mt-8 grid gap-5 border-y border-border py-6">
+          <div>
+            <dt
+              class="text-base uppercase tracking-wider text-muted-foreground"
+            >
+              Technologies
+            </dt>
+            <dd class="mt-2 flex flex-wrap gap-2">
+              {
+                story.data.technologies.map((technology) => (
+                  <span class="rounded-full border border-border px-2.5 py-1 text-sm font-medium">
+                    {technology}
+                  </span>
+                ))
+              }
+            </dd>
+          </div>
+        </dl>
+
+        {
+          (story.data.projectUrl || story.data.sourceUrl) && (
+            <div class="mt-6 flex flex-wrap gap-3">
+              {story.data.projectUrl && (
+                <a
+                  href={story.data.projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  Visit website <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {story.data.sourceUrl && (
+                <a
+                  href={story.data.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-background px-5 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  View source <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          )
+        }
+      </header>
+
+      {
+        story.data.coverImage && (
+          <figure class="my-10 overflow-hidden rounded-2xl border border-border bg-muted sm:my-14">
+            <img
+              src={story.data.coverImage}
+              alt={`${story.data.title} project preview`}
+              width="1200"
+              height="750"
+              class="w-full object-cover"
+            />
+          </figure>
+        )
+      }
+
+      <div
+        class="project-story prose prose-neutral mx-auto w-full min-w-0 max-w-[72ch] text-foreground prose-headings:scroll-mt-28 prose-headings:tracking-tight prose-h2:mt-14 prose-h2:text-2xl prose-p:text-muted-foreground prose-p:leading-8 prose-p:text-base lg:prose-p:text-lg prose-li:text-muted-foreground prose-li:leading-8 prose-li:text-base lg:prose-li:text-lg prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground dark:prose-invert"
+      >
+        <Content />
+      </div>
+    </article>
+
+    <nav
+      class="mx-auto mt-16 grid max-w-3xl gap-3 border-t border-border pt-8 sm:grid-cols-2"
+      aria-label="More project stories"
+    >
+      {
+        previousStory ? (
+          <a
+            href={`/blog/${previousStory.id}`}
+            class="group min-h-24 rounded-2xl border border-border p-5 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span class="text-sm lg:text-base text-muted-foreground">
+              ← Previous story
+            </span>
+            <span class="mt-2 block text-base lg:text-lg font-semibold group-hover:underline">
+              {previousStory.data.title}
+            </span>
+          </a>
+        ) : (
+          <span class="hidden sm:block" aria-hidden="true" />
+        )
+      }
+      {
+        nextStory && (
+          <a
+            href={`/blog/${nextStory.id}`}
+            class="group min-h-24 rounded-2xl border border-border p-5 text-right transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span class="text-sm lg:text-base text-muted-foreground">
+              Next story →
+            </span>
+            <span class="mt-2 block text-base lg:text-lg font-semibold group-hover:underline">
+              {nextStory.data.title}
+            </span>
+          </a>
+        )
+      }
+    </nav>
+  </main>
+</Layout>
