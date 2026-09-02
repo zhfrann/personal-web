@@ -1,7 +1,8 @@
 services:
     web:
-        build: .
-        image: personal-web:local
+        # build: .
+        # image: personal-web:local
+        image: ghcr.io/zhfrann/personal-web:latest
         container_name: personal-web
         restart: unless-stopped
         ports:
