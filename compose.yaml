@@ -1,8 +1,6 @@
 services:
     web:
-        # build: .
-        # image: personal-web:local
-        image: ghcr.io/zhfrann/personal-web:latest
+        image: "ghcr.io/zhfrann/personal-web:${IMAGE_TAG:-latest}"
         container_name: personal-web
         restart: unless-stopped
         ports:
