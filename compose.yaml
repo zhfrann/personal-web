@@ -1,0 +1,8 @@
+services:
+    web:
+        build: .
+        image: personal-web:local
+        container_name: personal-web
+        restart: unless-stopped
+        ports:
+            - "80:80"
