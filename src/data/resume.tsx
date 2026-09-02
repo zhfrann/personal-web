@@ -1,14 +1,8 @@
 import { Icons } from "@/components/icons";
-import { ReactLight } from "@/components/ui/svgs/reactLight";
-import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
 import { Typescript } from "@/components/ui/svgs/typescript";
 import { Nodejs } from "@/components/ui/svgs/nodejs";
-import { Python } from "@/components/ui/svgs/python";
-import { Golang } from "@/components/ui/svgs/golang";
 import { Postgresql } from "@/components/ui/svgs/postgresql";
 import { Docker } from "@/components/ui/svgs/docker";
-import { Kubernetes } from "@/components/ui/svgs/kubernetes";
-import { Astro } from "@/components/ui/svgs/astro";
 import { Javascript } from "@/components/ui/svgs/javascript";
 import { ExpressJS } from "@/components/ui/svgs/express";
 import { NestJS } from "@/components/ui/svgs/nestjs";
@@ -26,7 +20,7 @@ export const DATA = {
   description:
     "Software Engineering undergraduate with hands-on experience and a strong interest in backend development.",
   ogDescription:
-    "Backend Developer",
+    "Portfolio of Muhammad Zhafran Ilham, a Software Engineering undergraduate focused on backend development, REST APIs, databases, and scalable web applications.",
   summary:
     "Fourth-year Software Engineering undergraduate with hands-on experience in backend development, RESTful API design, and database management through academic, organizational, and professional projects. Familiar with building and maintaining applications using technologies such as TypeScript, JavaScript, Express.js, NestJS, Prisma ORM, Laravel, PostgreSQL, and MySQL. Interested in backend engineering and continuously developing an understanding of software development practices, API documentation, containerization, and system design fundamentals. A motivated learner and collaborative team member who is eager to improve technical and problem-solving skills while contributing to meaningful software projects.",
   avatarUrl: "/picofme.webp",

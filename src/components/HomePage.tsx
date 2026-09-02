@@ -27,7 +27,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
     <section id="about" className="scroll-mt-28">
       <BlurFade delay={BLUR_FADE_DELAY * 3}>
         <SectionHeading index="01">{DATA.sections.about.heading}</SectionHeading>
-        <div className="prose max-w-none text-pretty font-sans text-base lg:text-lg leading-8 dark:prose-invert">
+        <div className="prose max-w-none text-pretty font-sans text-foreground text-base lg:text-lg leading-8 dark:prose-invert">
           <Markdown>{DATA.summary}</Markdown>
         </div>
       </BlurFade>
@@ -64,7 +64,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
       <BlurFade delay={BLUR_FADE_DELAY * 7}>
         <SectionHeading index="04">{DATA.sections.education.heading}</SectionHeading>
         <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-          {DATA.education.map((education, index) => (
+          {DATA.education.map((education) => (
             <a
               key={education.school}
               href={education.href}
@@ -110,26 +110,21 @@ const sectionComponents: Record<string, React.ReactNode> = {
 
 export default function HomePage() {
   const shouldReduceMotion = useReducedMotion();
-  const [isProfileCollapsed, setIsProfileCollapsed] = useState(() => {
-    if (typeof window === "undefined") return false;
-
-    try {
-      return window.localStorage.getItem("portfolio-profile-collapsed") === "true";
-    } catch {
-      return false;
-    }
-  });
-  const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(min-width: 1024px)").matches
-      : false,
-  );
+  const [isProfileCollapsed, setIsProfileCollapsed] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
     const updateDesktopState = (event: MediaQueryListEvent) => setIsDesktop(event.matches);
 
     setIsDesktop(mediaQuery.matches);
+    try {
+      setIsProfileCollapsed(
+        window.localStorage.getItem("portfolio-profile-collapsed") === "true",
+      );
+    } catch {
+      // The layout still works when browser storage is unavailable.
+    }
     mediaQuery.addEventListener("change", updateDesktopState);
     return () => mediaQuery.removeEventListener("change", updateDesktopState);
   }, []);

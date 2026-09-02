@@ -55,7 +55,7 @@ export default function WorkSection() {
             <div className="min-w-0">
               <AccordionTrigger className="group min-h-20 cursor-pointer gap-4 rounded-lg py-4 pr-1 text-left hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-                  <div className="min-w-0">
+                  <div className="min-w-0 lg:max-w-[65%]">
                     <h3 className="font-semibold leading-tight text-xl text-foreground">
                       {work.company}
                     </h3>
@@ -63,7 +63,7 @@ export default function WorkSection() {
                       {work.title}
                     </p>
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 lg:max-w-[35%] flex flex-col items-start gap-1">
                     <time className="shrink-0 text-base font-normal tabular-nums text-muted-foreground sm:text-right">
                       {work.start} - {work.end ?? DATA.sections.work.presentLabel}
                     </time>

@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   image?: string;
   canonicalURL?: string;
+  robots?: string;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   description = DATA.ogDescription,
   image,
   canonicalURL = Astro.url.href,
+  robots = CONFIG.seo.robots,
 } = Astro.props;
 
 const pageTitle = title
@@ -115,11 +117,24 @@ const { baseFontSize } = CONFIG.typography;
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Robots -->
-    <meta name="robots" content={CONFIG.seo.robots} />
+    <meta name="robots" content={robots} />
     <meta
       name="googlebot"
-      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      content={robots.includes("noindex")
+        ? robots
+        : "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}
     />
+
+    <!-- Keep server-rendered content readable if JavaScript is disabled. -->
+    <noscript>
+      <style is:inline>
+        [data-blur-fade] {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      </style>
+    </noscript>
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
