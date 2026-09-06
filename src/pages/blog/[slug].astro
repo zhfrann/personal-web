@@ -3,6 +3,7 @@ export const prerender = true;
 
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { DATA } from "@/data/resume";
 
 export async function getStaticPaths() {
   const stories = (
@@ -27,6 +28,13 @@ interface Props {
 
 const { story, previousStory, nextStory } = Astro.props;
 const { Content } = await render(story);
+const project = DATA.projects.find((item) => item.slug === story.id);
+const projectUrl =
+  story.data.projectUrl ??
+  project?.links.find((link) => link.type === "Website")?.href;
+const sourceUrl =
+  story.data.sourceUrl ??
+  project?.links.find((link) => link.type === "Source")?.href;
 ---
 
 <Layout
@@ -80,11 +88,11 @@ const { Content } = await render(story);
         </dl>
 
         {
-          (story.data.projectUrl || story.data.sourceUrl) && (
+          (projectUrl || sourceUrl) && (
             <div class="mt-6 flex flex-wrap gap-3">
-              {story.data.projectUrl && (
+              {projectUrl && (
                 <a
-                  href={story.data.projectUrl}
+                  href={projectUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -92,9 +100,9 @@ const { Content } = await render(story);
                   Visit website <span aria-hidden="true">↗</span>
                 </a>
               )}
-              {story.data.sourceUrl && (
+              {sourceUrl && (
                 <a
-                  href={story.data.sourceUrl}
+                  href={sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-background px-5 text-sm font-medium transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
