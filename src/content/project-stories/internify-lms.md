@@ -2,10 +2,10 @@
 title: "Internify LMS"
 description: "Extending an existing internship platform with structured project, task, and learning workflows."
 technologies:
-  - TypeScript
+  - JavaScript
   - Express.js
+  - MySQL
   - Prisma ORM
-  - PostgreSQL
   - Swagger
 coverImage: "/projects/internify-lms-portal.webp"
 order: 1
@@ -13,6 +13,9 @@ draft: false
 ---
 
 ## Overview
+
+> This case study focuses on the engineering process and lessons learned. Source code, internal API details, database schemas, and other proprietary implementation details are intentionally excluded because Internify was developed as part of my internship at [Human Research Center (HUMIC) Engineering](https://humic.telkomuniversity.ac.id/).
+
 
 Internify LMS is an extension of HUMIC's existing internship management platform, designed to support interns after they are accepted into an internship program.
 
@@ -69,5 +72,3 @@ Internify LMS reinforced that backend development is not only about creating end
 Many important technical decisions came directly from business rules: deciding which state should be stored, which should be calculated, how relationships should be constrained, and how authorization should evolve as new roles gain responsibilities.
 
 It also gave me experience working within an existing codebase, where maintainability, compatibility, and understanding previous design decisions can be just as important as introducing new architecture.
-
-> This case study focuses on the engineering process and lessons learned. Source code, internal API details, database schemas, and other proprietary implementation details are intentionally excluded because Internify was developed as part of my internship at HUMIC.

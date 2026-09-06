@@ -10,6 +10,14 @@ import { Laravel } from "@/components/ui/svgs/laravel";
 import { MySQL } from "@/components/ui/svgs/mysql";
 import { MongoDB } from "@/components/ui/svgs/mongodb";
 import { Prisma } from "@/components/ui/svgs/prisma";
+import type { ReactNode } from "react";
+
+type ProjectLink = {
+  type: "Website" | "Source";
+  href: string;
+  icon: ReactNode;
+};
+const defineProjectLinks = (links: ProjectLink[]): ProjectLink[] => links;
 
 export const DATA = {
   name: "Muhammad Zhafran Ilham",
@@ -142,15 +150,41 @@ export const DATA = {
       description:
         "Extending HUMIC’s Internify platform with backend workflows for project-based learning, task management, and submission tracking.",
       technologies: [
-        "TypeScript",
-        "PostgreSQL",
-        "Prisma",
+        "JavaScript",
         "Express.js",
+        "MySQL",
+        "Prisma ORM",
         "Swagger",
       ],
-      links: [
-      ],
+      links: defineProjectLinks([]),
       image: "/projects/internify-lms-portal.webp",
+      video: "",
+    },
+    {
+      title: "Cyclefy",
+      slug: "cyclefy",
+      href: "/blog/cyclefy",
+      dates: "July 2025 - September 2025",
+      active: true,
+      description:
+        "A backend platform that supports donation, barter, borrowing, recycling, and repair workflows to extend the lifecycle of everyday items.",
+      technologies: [
+        "JavaScript",
+        "MySQL",
+        "Prisma",
+        "Express.js",
+        "Midtrans",
+        "i18n",
+        "Swagger",
+      ],
+      links: defineProjectLinks([
+        {
+          type: "Source",
+          href: "https://github.com/Byte4Aura/cyclefy-be",
+          icon: <Icons.github className="size-3" />,
+        },
+      ]),
+      image: "/projects/cyclefy/cyclefy-banner.webp",
       video: "",
     },
   ],
